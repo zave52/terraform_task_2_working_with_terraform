@@ -27,6 +27,25 @@ resource "azurerm_storage_blob" "storage_blob" {
 
 data "archive_file" "terraform_code" {
   type        = "tar.gz"
-  source_dir  = path.module
   output_path = "${path.module}/terraform.tar.gz"
+
+  source {
+    content  = file("${path.module}/main.tf")
+    filename = "main.tf"
+  }
+
+  source {
+    content  = file("${path.module}/provider.tf")
+    filename = "provider.tf"
+  }
+
+  source {
+    content  = file("${path.module}/variables.tf")
+    filename = "variables.tf"
+  }
+
+  source {
+    content  = file("${path.module}/outputs.tf")
+    filename = "outputs.tf"
+  }
 }
