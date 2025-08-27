@@ -22,5 +22,11 @@ resource "azurerm_storage_blob" "storage_blob" {
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.storage_container.name
   type                   = "Block"
-  source                 = "terraform.tar.gz"
+  source                 = data.archive_file.terraform_code.output_path
+}
+
+data "archive_file" "terraform_code" {
+  type        = "tar.gz"
+  source_dir  = path.module
+  output_path = "${path.module}/terraform.tar.gz"
 }
