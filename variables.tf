@@ -17,7 +17,3 @@ variable "container_name" {
 variable "blob_name" {
   type = string
 }
-
-variable "subscription_id" {
-  type = string
-}
